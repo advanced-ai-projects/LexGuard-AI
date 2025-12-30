@@ -196,6 +196,7 @@ Copy code
 ## Repository Structure
 
 lexguard-ai/
+
 ├── ingestion/
 │ ├── loaders.py
 │ ├── chunking.py
