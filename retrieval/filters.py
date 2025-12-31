@@ -3,7 +3,7 @@ from typing import Optional, List
 
 @dataclass(frozen=True)
 class RetrievalFilters:
-    jurisdiction: Optional[str] = None   # e.g. "UK", "EU"
+    jurisdiction: Optional[str] = None   # e.g. "Zimbabwe", "South Africa"
     domain: Optional[str] = None         # e.g. "employment", "tax"
     source: Optional[str] = None         # e.g. "GOV.UK", "ACAS"
 
