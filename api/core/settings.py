@@ -42,3 +42,14 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     # Cached singleton so settings isn't re-parsed on every request
     return Settings()
+
+    # OpenSearch auth mode
+    OPENSEARCH_AUTH_MODE: str = "none"  # none|basic|sigv4
+
+    # Basic auth (optional, e.g. local or self-managed)
+    OPENSEARCH_USERNAME: str | None = None
+    OPENSEARCH_PASSWORD: str | None = None
+
+    # SigV4 (AWS managed OpenSearch)
+    OPENSEARCH_AWS_SERVICE: str = "es"  # usually "es"
+

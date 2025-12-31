@@ -22,3 +22,6 @@ def config_debug():
         "opensearch_index": settings.OPENSEARCH_INDEX,
         "bedrock_model_id": settings.BEDROCK_MODEL_ID,
     }
+
+from api.routes.opensearch_routes import router as os_router
+app.include_router(os_router)
