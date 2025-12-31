@@ -196,11 +196,17 @@ Copy code
 ## Repository Structure
 
 lexguard-ai/
+
 ├── ingestion/
+
 │ ├── loaders.py
+
 │ ├── chunking.py
+
 │ ├── metadata.py
+
 │
+
 ├── retrieval/
 │ ├── hybrid_search.py
 │ ├── reranker.py
