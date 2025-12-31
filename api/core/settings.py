@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     ENV: str = Field(default="local", description="local|dev|staging|prod")
     DEBUG: bool = True
 
+    # Logging
+    LOG_LEVEL: str = "INFO"   # DEBUG|INFO|WARNING|ERROR
+    LOG_JSON: bool = True
+
     # AWS
     AWS_REGION: str = "eu-west-1"
 
