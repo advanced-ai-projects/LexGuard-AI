@@ -4,11 +4,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # Load from .env automatically
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        extra="ignore",  # ignore unknown env vars
+        extra="ignore",
     )
 
     # App
@@ -19,18 +18,27 @@ class Settings(BaseSettings):
     # AWS
     AWS_REGION: str = "eu-west-1"
 
-    # OpenSearch (local or managed)
+    # OpenSearch
     OPENSEARCH_HOST: str = "localhost"
     OPENSEARCH_PORT: int = 9200
     OPENSEARCH_USE_SSL: bool = False
     OPENSEARCH_VERIFY_CERTS: bool = False
     OPENSEARCH_INDEX: str = "lexguard-docs"
 
-    # Docs store (S3 later; local now still ok)
+    OPENSEARCH_AUTH_MODE: str = "none"  # none|basic|sigv4
+    OPENSEARCH_USERNAME: str | None = None
+    OPENSEARCH_PASSWORD: str | None = None
+    OPENSEARCH_AWS_SERVICE: str = "es"
+
+    # Docs (S3 later)
     S3_BUCKET: str = "lexguard-docs-bucket"
 
-    # Bedrock (later)
+    # Bedrock (safe toggle)
+    BEDROCK_ENABLED: bool = False
+    BEDROCK_REGION: str | None = None
     BEDROCK_MODEL_ID: str = "anthropic.claude-3-haiku-20240307-v1:0"
+    BEDROCK_MAX_TOKENS: int = 512
+    BEDROCK_TEMPERATURE: float = 0.2
 
     @property
     def opensearch_url(self) -> str:
@@ -40,16 +48,4 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    # Cached singleton so settings isn't re-parsed on every request
     return Settings()
-
-    # OpenSearch auth mode
-    OPENSEARCH_AUTH_MODE: str = "none"  # none|basic|sigv4
-
-    # Basic auth (optional, e.g. local or self-managed)
-    OPENSEARCH_USERNAME: str | None = None
-    OPENSEARCH_PASSWORD: str | None = None
-
-    # SigV4 (AWS managed OpenSearch)
-    OPENSEARCH_AWS_SERVICE: str = "es"  # usually "es"
-
